@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -21,13 +22,6 @@ using namespace std;
 void database_connection() ;
 void database_insertR() ;
 void retrive_from_database() ;
-/*
-sqlite3 *db ;
-sqlite3_stmt *stmt ;
-int result1, result2, roll;
-string query, id, URED_2302, MATH_2307, CSE_2321, CSE_2322, STAT_2311, CHEM_2301, CSE_2323, CSE_2324;
-*/
-
 
 const int MAX_STUDENTS = 40;
 
@@ -61,7 +55,6 @@ void queue_delete() ;
 void queue_search() ;
 void queue_display() ;
 
-
 struct Student
 {
     string id;
@@ -70,24 +63,16 @@ struct Student
     int notTakenCourses;
 };
 
-
 struct Node
 {
     Student data;
     Node* next;
 };
 
-
 Node* head = nullptr;
-
-
-
-
-
 
 Student students[MAX_STUDENTS];
 int n = 0;
-
 
 #define MAX_STUDENTS 40
 
@@ -98,15 +83,12 @@ Student queueArr[MAX_STUDENTS];
 int front = 0, rear = -1;
 int qsize = 0;
 
-
-
 struct Course
 {
     string code;
     string name;
     double credit;
 };
-
 
 // Grade to GPA conversion
 double gradeToPoint(const string &grade)
@@ -206,9 +188,6 @@ void drawBox(int x, int y, int width = 30, int height = 10, const string& title 
 #endif
 }
 
-
-
-
 void showTemporaryMessage(int x, int y, const char* message)
 {
     COORD pos = { (SHORT)x, (SHORT)y };
@@ -223,103 +202,11 @@ void showTemporaryMessage(int x, int y, const char* message)
     cout << string(strlen(message), ' ')  ;
 }
 
-/*
-void database_connection() // connect to sqlite
-{
-    if (sqlite3_open("demo.db", &db) == SQLITE_OK)
-    {
-        result1 = sqlite3_prepare_v2(db,
-                                     "CREATE TABLE IF NOT EXISTS user("
-                                     "id VARCHAR(50), "
-                                     "URED_2302 VARCHAR(50), "
-                                     "MATH_2307 VARCHAR(80), "
-                                     "CSE_2321 VARCHAR(80), "
-                                     "CSE_2322 VARCHAR(80), "
-                                     "STAT_2311 VARCHAR(80), "
-                                     "CHEM_2301 VARCHAR(80), "
-                                     "CSE_2323 VARCHAR(80), "
-                                     "CSE_2324 VARCHAR(80));",
-                                     -1, &stmt, NULL);
-
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-    }
-
-    if (result1 != SQLITE_OK)
-    {
-        cout << "error: " << sqlite3_errmsg(db) << endl;
-    }
-}
-
-void database_insertR(const Student& s, const vector<string>& grades)
-{
-    string query = "INSERT INTO user(id, URED_2302, MATH_2307, CSE_2321, CSE_2322, STAT_2311, CHEM_2301, CSE_2323, CSE_2324) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
-    int result1 = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
-    sqlite3_bind_text(stmt, 1, s.id.c_str(), s.id.length(), SQLITE_TRANSIENT);
-    for (int i = 0; i < 8; ++i)
-    {
-        sqlite3_bind_text(stmt, i + 2, grades[i].c_str(), grades[i].length(), SQLITE_TRANSIENT);
-    }
-
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-
-    if (result1 != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        cout << "Data inserted successfully" << endl;
-    }
-}
-
-void retrive_from_database()
-{
-    query = "SELECT * FROM user;";
-    result1 = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
-    if (result1 != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        cout << "\t" << setw(10) << left << "ID"
-             << setw(10) << "URED_2302"
-             << setw(10) << "MATH_2307"
-             << setw(10) << "CSE_2321"
-             << setw(10) << "CSE_2322"
-             << setw(10) << "STAT_2311"
-             << setw(10) << "CHEM_2301"
-             << setw(10) << "CSE_2323"
-             << setw(10) << "CSE_2324" << endl;
-
-        while ((result1 = sqlite3_step(stmt)) == SQLITE_ROW)
-        {
-            cout << "\t" << setw(10) << sqlite3_column_text(stmt, 0)
-                 << setw(10) << sqlite3_column_text(stmt, 1)
-                 << setw(10) << sqlite3_column_text(stmt, 2)
-                 << setw(10) << sqlite3_column_text(stmt, 3)
-                 << setw(10) << sqlite3_column_text(stmt, 4)
-                 << setw(10) << sqlite3_column_text(stmt, 5)
-                 << setw(10) << sqlite3_column_text(stmt, 6)
-                 << setw(10) << sqlite3_column_text(stmt, 7)
-                 << setw(10) << sqlite3_column_text(stmt, 8) << endl;
-        }
-        sqlite3_finalize(stmt);
-    }
-}
-
-*/
-
 int main()
 {
-    #ifdef _WIN32
-        SetConsoleOutputCP(65001); // UTF-8
-    #endif
+#ifdef _WIN32
+    SetConsoleOutputCP(65001); // UTF-8
+#endif
 
     Student students[MAX_STUDENTS];
     int n = 0; // number of students currently inserted
@@ -403,7 +290,7 @@ void menu()
     gotoxy(19, 3) ;
     cout << "\033[1;31m"<< ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  MAIN MENU  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << "\033[0m" ;
     cout << "\033[97m" ;
-    drawBox(19, 4, 85, 18, "    WHICH OPERATION YOU WANNA USE??");
+    drawBox(19, 4, 85, 22, "    WHICH OPERATION YOU WANNA USE??");
 
     cout << "\033[93m" ;
     drawBox(25, 7, 30, 5 );
@@ -429,11 +316,17 @@ void menu()
     cout << "4. QUEUE" ;
     cout << "\033[0m" ;
 
+    cout << "\033[93m" ;
+drawBox(47, 20, 30, 5);
+gotoxy(58, 22);
+cout << "0. EXIT";
+cout << "\033[0m";
+
     int n ;
 
-    gotoxy(40, 23) ;
+    gotoxy(40, 27) ;
     cout << "\033[3;4;94mCHOOSE AN OPTION\033[0m"  ;
-    gotoxy(60, 23) ;
+    gotoxy(60, 27) ;
     cin >> n ;
 
 
@@ -445,6 +338,12 @@ void menu()
         stack_operation() ;
     else if (n == 4)
         queue_operation() ;
+    else if (n == 0)
+    {
+        system("CLS") ;
+        exit(0);
+    }
+
     else
     {
         showTemporaryMessage(68, 23, "\033[3;33mInvalid input! Please try again....\033[0m") ;
@@ -459,10 +358,7 @@ void menu()
 void array_operation()
 {
     system("CLS") ;
-
-
     gotoxy(20, 4) ;
-
     cout << "\033[1;92m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  MAIN MENU  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\033[0m" ;
     cout << "\033[95m" ;
     drawBox(19, 5, 85, 12, "USING ARRAY");
@@ -511,12 +407,6 @@ void array_operation()
         // getchar() ;
         array_operation() ;
     }
-
-
-
-
-
-
 }
 
 
@@ -544,9 +434,6 @@ void linked_list_operation()
 
     gotoxy(22, 12) ;
     cout << "Press 5 to go back......" << endl ;
-
-
-
     gotoxy(40, 17) ;
     cout << "\033[3;4;94mCHOOSE AN OPTION\033[0m" ;
     gotoxy(60, 17) ;
@@ -648,7 +535,6 @@ Student taking_input()
     return s ;
 }
 
-
 void array_insert() {
     system("CLS");
     drawBox(19, 5, 85, 20, "\033[1;101mINSERT A STUDENT USING ARRAY\033[0m");
@@ -658,7 +544,6 @@ void array_insert() {
         cout << "\033[1;96mCannot insert more students. Array is full.\033[0m";
         return;
     }
-
     Student s = taking_input();
 
     int pos = n;
@@ -666,18 +551,13 @@ void array_insert() {
         students[pos] = students[pos - 1]; // Shift right
         pos--;
     }
-
     students[pos] = s;
     n++;
-
     gotoxy(50, 20);
     cout << "\033[1;3;93mStudent inserted successfully!\033[0m";
     Sleep(1550);
-
     array_operation();
 }
-
-
 void array_delete()
 {
     system("CLS");
@@ -827,9 +707,6 @@ void array_display()
     cin.get();
     array_operation();
 }
-
-
-
 void linked_list_insert()
 {
     system("CLS");
@@ -861,8 +738,6 @@ void linked_list_insert()
 
     linked_list_operation(); // If you have menu/options after insert
 }
-
-
 
 void linked_list_delete()
 {
@@ -909,7 +784,6 @@ void linked_list_delete()
     linked_list_operation();
 }
 
-
 void linked_list_search()
 {
     system("CLS");
@@ -955,8 +829,6 @@ void linked_list_search()
     linked_list_operation();
 }
 
-
-
 void linked_list_display()
 {
     system("CLS");
@@ -992,14 +864,12 @@ void linked_list_display()
             cur = cur->next;
         }
     }
-
     gotoxy(35, 27);
     cout << "\033[3;93mPress Enter to go back...\033[0m";
     cin.ignore();
     cin.get();
     linked_list_operation();
 }
-
 
 void stack_operation()
 {
@@ -1035,7 +905,6 @@ void stack_operation()
         stack_operation();
     }
 }
-
 
 void stack_insert()
 {
@@ -1080,7 +949,6 @@ void stack_delete()
     cin.get();
     stack_operation();
 }
-
 
 void stack_search()
 {
@@ -1142,7 +1010,6 @@ void stack_search()
     stack_operation();
 }
 
-
 void stack_display()
 {
     system("CLS");
@@ -1174,7 +1041,6 @@ void stack_display()
                  << stackArr[i].notTakenCourses;
         }
     }
-
     gotoxy(35, 27);
     cout << "\033[3;93mPress Enter to go back...\033[0m";
     cin.ignore(); cin.get();
@@ -1222,7 +1088,6 @@ void queue_operation()
         queue_operation();
     }
 }
-
 
 void queue_insert()
 {
@@ -1298,7 +1163,6 @@ void queue_search()
 
     bool found = false;
     Student s;
-
     for (int i = 0; i < qsize; ++i)
     {
         int idx = (front + i) % MAX_STUDENTS;
@@ -1309,7 +1173,6 @@ void queue_search()
             break;
         }
     }
-
     if (found)
     {
         gotoxy(23, 11); cout << "Student found:";
@@ -1323,7 +1186,6 @@ void queue_search()
         gotoxy(23, 11);
         cout << "\033[93mStudent ID not found.\033[0m";
     }
-
     gotoxy(60, 18);
     cout << "\033[93mPress Enter to go back...\033[0m";
     cin.ignore(); cin.get();
@@ -1368,4 +1230,3 @@ void queue_display()
     cin.ignore(); cin.get();
     queue_operation();
 }
-
